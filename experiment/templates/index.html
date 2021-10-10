@@ -10,10 +10,11 @@
 </head>
 <body>
     <div id="app">
-        <div id="poem-pair" v-if="in_progress">
-            <poem v-for="poem in poem_pair" v-bind:poem="poem"></poem>
+        <div id="experiment" v-if="incomplete">
+            <div id="poem-pair" v-if="poem_ix > -.5">
+                <poem v-for="poem in poem_pair" v-bind:poem="poem"></poem>
+            </div>
         </div>
-        <button v-on:click='getPoems'>Get Poems</button>
     </div>
 </body>
 

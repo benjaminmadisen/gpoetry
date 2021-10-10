@@ -10,15 +10,6 @@ bucket = storage_client.bucket(os.getenv("GPOETRY_BUCKET"))
 blob = bucket.blob(os.getenv("GPOETRY_FILE"))
 poems = pickle.loads(blob.download_as_bytes())
 authors = list(poems.keys())
-poem_info = {}
-poem_ix = {}
-ix = 0
-for author in authors:
-    for type in ['real', 'fake']:
-        for poem_key in list(poems[author][type].keys()):
-            poem_info[ix] = {'type':type, 'text':poems[author][type][poem_key]}
-            poem_ix[poem_key] = ix
-            ix += 1
 
 app = Flask(__name__)
 app.secret_key = os.urandom(50)
@@ -29,17 +20,22 @@ def root():
 
 @app.route('/get_poems')
 def get_poems():
-    author = random.choice(authors)
-    real = random.choice(list(poems[author]['real'].keys()))
-    real_ix = poem_ix[real]
-    real_info = {'id':real_ix, 'text':poem_info[real_ix]['text']}
-    fake = random.choice(list(poems[author]['fake'].keys()))
-    fake_ix = poem_ix[fake]
-    fake_info = {'id':fake_ix, 'text':poem_info[fake_ix]['text']}
-    if random.random() > .5:
-        return {'poem_pair':[real_info, fake_info]}
-    else:
-        return {'poem_pair':[fake_info, real_info]}
+    poem_response = []
+    sample_authors = random.sample(authors,2)
+    for author in sample_authors:
+        real = random.choice(list(poems[author]['real'].values()))
+        real_info = {'type':'real', 'text':real}
+        fake = random.choice(list(poems[author]['fake'].values()))
+        fake_info = {'type':'fale', 'text':fake}
+        if random.random() > .5:
+            real_info['option'] = 0
+            fake_info['option'] = 1
+            poem_response.append([real_info, fake_info])
+        else:
+            real_info['option'] = 1
+            fake_info['option'] = 0
+            poem_response.append([fake_info, real_info])
+    return {'poem_pairs':poem_response}
 
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=8080, debug=True)
