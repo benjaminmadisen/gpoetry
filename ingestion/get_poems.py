@@ -64,6 +64,7 @@ class PublicDomainPoetryScraper:
         """
         text = unicodedata.normalize('NFKD',text)
         text.replace("\r","")
+        text.replace("\n\n","\n")
         return text
     
     def write_text_to_local(self, author: str, poem:str, text:str) -> None:
@@ -94,11 +95,12 @@ class PublicDomainPoetryScraper:
         authors = random.sample(authors, n_authors)
         for author in tqdm(authors):
             poems = self.get_poems_from_author(author)
-            poems = random.sample(poems, n_poems)
+            if n_poems < len(poems):
+                poems = random.sample(poems, n_poems)
             for poem in tqdm(poems, position=1, leave=False):
                 poem_text = self.get_poem_text_from_poem(poem)
                 clean_text = self.get_clean_text_from_poem_text(poem_text)
-                if len(clean_text.split(" ")) < 256:
+                if len(clean_text.split(" ")) < max_tokens:
                     self.write_text_to_local(author, poem, clean_text)
 
 
@@ -114,4 +116,4 @@ if __name__ == "__main__":
         poetry_loader = PublicDomainPoetryScraper(args.storage_path)
     else:
         raise ModuleNotFoundError("Loader %s not an option." % args.loader)
-    poetry_loader.load_poems(args.authors, args.poems, args.max_tokens)
+    poetry_loader.load_poems(int(args.authors), int(args.poems), int(args.max_tokens))

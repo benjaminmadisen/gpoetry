@@ -10,6 +10,11 @@ Here's the rules we agreed on:
 2. The "AI" poems can look at the "Human" poems by an author when generating their poems.
 3. The test is given by pairing one "Human" and one "AI" poem from a set of random authors, and testing how frequently my brother picks the right poem.
 
+Note on poem generation: there were two human interventions.
+
+First, I manually removed text from poems which was AI "detritus" - things like adding a line after the poem that says "I hoped you liked this poem!" or "from the Robert Lee Frost collection". I think with improved queries this could be avoided.
+Second, I removed poems which reused a real title, which often led to the AI reprinting a poem verbatim.
+
 ## This Repo
 
 There are three parts to this repo.
