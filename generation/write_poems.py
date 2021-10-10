@@ -50,7 +50,7 @@ class OpenAIPoetryGenerator:
         """
         response = openai.Completion.create(
             engine="davinci",
-            prompt="Below is a poem written by %s.\n%s"%(poet, poem_title),
+            prompt="Below is a poem.\n%s\nby %s"%(poem_title, poet),
             temperature=0.7,
             max_tokens=512,
             top_p=1.0,
