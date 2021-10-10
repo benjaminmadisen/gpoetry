@@ -1,0 +1,22 @@
+<html>
+<head>
+    <title>GeePoeTree</title>
+    <link rel="icon" 
+        type="image/png" 
+        href="{{ url_for('static', filename='favicon.png') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div id="app">
+        <div id="poem-pair" v-if="in_progress">
+            <poem v-for="poem in poem_pair" v-bind:poem="poem"></poem>
+        </div>
+        <button v-on:click='getPoems'>Get Poems</button>
+    </div>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</html>

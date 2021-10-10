@@ -101,7 +101,7 @@ class OpenAIPoetryGenerator:
         
         if not os.path.exists(self.local_path+author):
             os.makedirs(self.local_path+author)
-        with open(self.local_path+author+"/"+poem+".txt","w", encoding='utf-8') as poem_file:
+        with open(self.local_path+author+"/"+poem+"-0.txt","w", encoding='utf-8') as poem_file:
             poem_file.write(text)
 
     def generate_poems(self, n_authors: int, n_poems: int, max_tokens: int):
