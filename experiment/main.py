@@ -21,12 +21,20 @@ def root():
 @app.route('/get_poems')
 def get_poems():
     poem_response = []
-    sample_authors = random.sample(authors,3)
+    sample_authors = random.sample(authors,25)
+    ix = 0
     for author in sample_authors:
-        real = random.choice(list(poems[author]['real'].values()))
-        real_info = {'type':'real', 'text':real, 'chosen':False}
-        fake = random.choice(list(poems[author]['fake'].values()))
-        fake_info = {'type':'fale', 'text':fake, 'chosen':False}
+        ix += 1
+        real_key = random.choice(list(poems[author]['real'].keys()))
+        real = poems[author]['real'][real_key]
+        real_info = {'type':'real', 'text':real.strip(), 'chosen':False, 'ix':ix,
+                     'name':real_key[:65],
+                     'author':" ".join([n.capitalize() for n in author.split("-")])}
+        fake_key = random.choice(list(poems[author]['fake'].keys()))
+        fake = poems[author]['fake'][fake_key]
+        fake_info = {'type':'fake', 'text':fake.strip(), 'chosen':False, 'ix':ix,
+                     'name':fake_key[:65],
+                     'author':" ".join([n.capitalize() for n in author.split("-")])}
         if random.random() > .5:
             real_info['option'] = 0
             fake_info['option'] = 1

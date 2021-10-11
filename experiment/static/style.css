@@ -1,6 +1,9 @@
 body{
     margin: 0px;
 }
+pre{
+    white-space: pre-line;
+}
 #app{
     display: flex;
     flex-direction: column;
@@ -12,8 +15,8 @@ body{
     color:darkgrey;
 }
 #start-text {
-    width:50%;
-    text-align: center;
+    width:40%;
+    text-align: left;
 }
 #experiment{
     display: flex;
@@ -38,6 +41,7 @@ body{
     width: 50%;
     border: 3px solid transparent;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
@@ -55,6 +59,38 @@ body{
 }
 .poem.review.chosen.correct{
     border: 3px solid darkgreen;
+}
+.poem-result{
+    background-color: lightpink;
+}
+.poem-result.result_correct{
+    background-color: lightgreen;
+}
+.poem-result td{
+    border: 2px solid transparent;
+}
+.poem-result .result_chosen{
+    border: 2px solid darkred;
+}
+.poem-result .result_chosen.result_correct{
+    border: 2px solid darkgreen;
+}
+.poem-result-title{
+    width: 35em;
+    height: 1.5em;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+#results-text{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#results-numbers{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 30em;
 }
 #nav-buttons{
     display: flex;
