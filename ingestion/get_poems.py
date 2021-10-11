@@ -63,8 +63,7 @@ class PublicDomainPoetryScraper:
 
         """
         text = unicodedata.normalize('NFKD',text)
-        text.replace("\r","")
-        text.replace("\n\n","\n")
+        text = text.replace("\r","")
         return text
     
     def write_text_to_local(self, author: str, poem:str, text:str) -> None:

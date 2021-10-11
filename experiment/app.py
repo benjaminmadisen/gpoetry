@@ -21,7 +21,7 @@ def root():
 @app.route('/get_poems')
 def get_poems():
     poem_response = []
-    sample_authors = random.sample(authors,2)
+    sample_authors = random.sample(authors,3)
     for author in sample_authors:
         real = random.choice(list(poems[author]['real'].values()))
         real_info = {'type':'real', 'text':real, 'chosen':False}

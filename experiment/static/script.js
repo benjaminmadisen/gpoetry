@@ -1,11 +1,15 @@
 Vue.component('poem', {
     props: ['poem'],
     template: `
-      <div class="poem">
-        <div class="poem-text">
+      <div v-if='app.incomplete' tabindex="0" class="poem clickable" v-on:click='app.nextPoem(poem)'>
+        <pre class="poem-text clickable">
           {{poem.text}}
-        </div>
-        <button v-if='!app.review' v-on:click='app.nextPoem(poem)'>Select</button>
+        </pre>
+      </div>
+      <div v-else class="poem review" v-bind:class="{chosen: poem.chosen, correct: poem.type=='real'}">
+        <pre class="poem-text review">
+          {{poem.text}}
+        </pre>
       </div>
     `
   })
@@ -33,6 +37,7 @@ var app = new Vue({
             app.poem_ix = -1;
             app.incomplete = true;
             app.review = false;
+            app.correct = 0;
           };
         },
         begin: function () {
