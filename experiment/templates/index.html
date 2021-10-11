@@ -11,9 +11,17 @@
 <body>
     <div id="app">
         <div id="experiment" v-if="incomplete">
+            <div id="start-info" v-if="poem_ix < -.5">
+                <button v-on:click="begin()">Begin</button>
+            </div>
             <div id="poem-pair" v-if="poem_ix > -.5">
                 <poem v-for="poem in poem_pair" v-bind:poem="poem"></poem>
             </div>
+        </div>
+        <div id="results" v-if="!incomplete">
+            Correct: <span v-html="correct"></span>
+            Total: <span v-html="poem_pairs.length"></span>
+            <button v-on:click="getPoems()">Reset</button>
         </div>
     </div>
 </body>

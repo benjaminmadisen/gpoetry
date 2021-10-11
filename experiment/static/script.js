@@ -15,7 +15,7 @@ var app = new Vue({
         incomplete: true,
         poem_pairs: [],
         poem_pair: [],
-        chosen: [],
+        correct: 0,
         poem_ix:-1,
       },
       methods: {
@@ -29,12 +29,17 @@ var app = new Vue({
           xhr.onload = function() {
             let responseObj = xhr.response;
             app.poem_pairs = responseObj.poem_pairs;
-            app.poem_ix = 0;
-            app.poem_pair = app.poem_pairs[app.poem_ix];
+            app.poem_ix = -1;
+            app.incomplete = true;
           };
         },
+        begin: function () {
+          app.poem_ix = 0;
+          app.poem_pair = app.poem_pairs[app.poem_ix];
+        },
         nextPoem: function (poem) {
-          app.chosen.push(poem.option);
+          poem.chosen = true;
+          if (poem.type === "real"){app.correct++}
           app.poem_ix++;
           if (app.poem_ix == app.poem_pairs.length){
             app.incomplete = false;

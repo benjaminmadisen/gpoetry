@@ -24,9 +24,9 @@ def get_poems():
     sample_authors = random.sample(authors,2)
     for author in sample_authors:
         real = random.choice(list(poems[author]['real'].values()))
-        real_info = {'type':'real', 'text':real}
+        real_info = {'type':'real', 'text':real, 'chosen':False}
         fake = random.choice(list(poems[author]['fake'].values()))
-        fake_info = {'type':'fale', 'text':fake}
+        fake_info = {'type':'fale', 'text':fake, 'chosen':False}
         if random.random() > .5:
             real_info['option'] = 0
             fake_info['option'] = 1
