@@ -13,3 +13,8 @@
 .poem{
     width:45%;
 }
+#resultsReview{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
